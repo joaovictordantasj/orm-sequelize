@@ -51,7 +51,19 @@ class PessoaController {
       const pessoaAtualizada = await database.Pessoas.findOne({
         where: { id: Number(id) },
       });
-      return res.status(200).send(pessoaAtualizada);
+      return res.status(200).json(pessoaAtualizada);
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  }
+
+  static async apagaPessoa(req, res) {
+    // DELETE um registro no banco
+    const { id } = req.params;
+
+    try {
+      await database.Pessoas.destroy({ where: { id: Number(id) } });
+      return res.status(200).json({ mensagem: `id ${id} deletado!` });
     } catch (err) {
       return res.status(500).json(err.message);
     }
