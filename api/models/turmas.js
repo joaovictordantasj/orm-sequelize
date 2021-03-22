@@ -13,8 +13,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'turma_id',
       });
 
-      Turmas.belongsTo(models.Pessoas);
-      Turmas.belongsTo(models.Niveis);
+      Turmas.belongsTo(models.Pessoas, {
+        foreignKey: 'docente_id',
+      });
+      Turmas.belongsTo(models.Niveis, {
+        foreignKey: 'nivel_id',
+      });
     }
   }
   Turmas.init(
