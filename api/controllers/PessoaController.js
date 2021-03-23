@@ -89,6 +89,22 @@ class PessoaController {
       return res.status(500).json(err.message);
     }
   }
+
+  static async criaMatricula(req, res) {
+    // CREATE uma nova matricula no banco
+
+    const { estudanteId } = req.params;
+    const novaMatricula = { ...req.body, estudante_id: Number(estudanteId) };
+
+    try {
+      const novaMatriculaCriada = await database.Matriculas.create(
+        novaMatricula
+      );
+      return res.status(200).json(novaMatriculaCriada);
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  }
 }
 
 module.exports = PessoaController;
