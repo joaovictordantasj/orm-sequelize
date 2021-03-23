@@ -68,6 +68,27 @@ class PessoaController {
       return res.status(500).json(err.message);
     }
   }
+
+  static async pegaUmaMaticula(req, res) {
+    // READ uma matrícula
+
+    // http://localhost:3000/pessoas/1/matriculas/5
+    // http://localhost:3000/pessoas/:estudanteId/matriculas/:matriculaId
+
+    const { estudanteId, matriculaId } = req.params;
+
+    try {
+      const umaMatricula = await database.Matriculas.findOne({
+        where: {
+          id: Number(matriculaId),
+          estudante_id: Number(estudanteId),
+        },
+      });
+      return res.status(200).json(umaMatricula);
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  }
 }
 
 module.exports = PessoaController;
