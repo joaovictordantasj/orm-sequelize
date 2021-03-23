@@ -14,11 +14,15 @@ router.delete('/pessoas/:id', PessoaController.apagaPessoa); // DELETE
 router.get(
   '/pessoas/:estudanteId/matricula/:matriculaId',
   PessoaController.pegaUmaMaticula
-);
-router.post('/pessoas/:estudanteId/matricula', PessoaController.criaMatricula);
+); // READ
+router.post('/pessoas/:estudanteId/matricula', PessoaController.criaMatricula); // CREATE
 router.put(
   '/pessoas/:estudanteId/matricula/:matriculaId',
   PessoaController.atualizaMatricula
-);
+); // UPDATE
+router.delete(
+  '/pessoas/:estudanteId/matricula/:matriculaId',
+  PessoaController.apagaMatricula
+); // DELETE
 
 module.exports = router;

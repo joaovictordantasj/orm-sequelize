@@ -107,7 +107,7 @@ class PessoaController {
   }
 
   static async atualizaMatricula(req, res) {
-    // UPDATE um registro no banco
+    // UPDATE uma matricula do banco
     const { estudanteId, matriculaId } = req.params;
     const novasInfos = req.body;
 
@@ -122,6 +122,18 @@ class PessoaController {
         where: { id: Number(matriculaId) },
       });
       return res.status(200).json(matriculaAtualizada);
+    } catch (err) {
+      return res.status(500).json(err.message);
+    }
+  }
+
+  static async apagaMatricula(req, res) {
+    // DELETE uma matricula do banco
+    const { estudanteId, matriculaId } = req.params;
+
+    try {
+      await database.Matriculas.destroy({ where: { id: Number(matriculaId) } });
+      return res.status(200).json({ mensagem: `id ${matriculaId} deletado!` });
     } catch (err) {
       return res.status(500).json(err.message);
     }
